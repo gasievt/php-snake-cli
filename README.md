@@ -12,7 +12,7 @@ phpize
 make
 make install
 ```
-The php.ini will need to be adjusted, and an `extension=ncurses` line will need to be added before the extension can be used.
+The `php.ini` will need to be adjusted, and an `extension=ncurses` line will need to be added before the extension can be used.
 <br>
 <br>
 2. Run it
