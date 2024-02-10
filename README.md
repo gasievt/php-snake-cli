@@ -1,8 +1,7 @@
 # php-snake-cli
 ![GIF](https://i.ibb.co/XtKQdqG/2024-02-09-23-24-11-online-video-cutter-com.gif)
 <br>
-<b>HOW TO RUN</b>
-<br>
+### HOW TO RUN:
 1. Install ncurses
 ```properties
 git clone https://github.com/OOPS-ORG-PHP/mod_ncurses.git
@@ -16,7 +15,9 @@ The `php.ini` will need to be adjusted, and an `extension=ncurses` line will nee
 <br>
 <br>
 2. Run it
-<br>
 ```properties
 php snake.php
 ```
+### CONTROLS:
+ - Arrow keys to control the snake
+ - Q to quit the game
