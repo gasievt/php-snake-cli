@@ -4,7 +4,7 @@ ncurses_curs_set(0);
 $board = new Board();
 $snake = new Snake($board->getBoardYX()['y'], $board->getBoardYX()['x']);
 $snake->draw($board->board);
-$food = new Food($board);
+$food = new Food($board, $snake);
 ncurses_timeout(0);
 
 while(true){
@@ -67,28 +67,46 @@ class Board {
 class Food{
     public array $location;
     protected $boardW;
-    public function __construct(Board $board){
+    protected $snake;
+    public function __construct(Board $board, Snake $snake){
+        $this->snake = $snake;
         $this->boardW = $board->board;
         $boardYX = $board->getBoardYX();
-        $this->location = ['y'=>rand(1, $boardYX['y']-2), 'x'=>rand(1, $boardYX['x']-2)];
+        $locationTmp = ['y'=>rand(1, $boardYX['y']-2), 'x'=>rand(1, $boardYX['x']-2)];
+        if($this->isFoodBodyIntersects($snake->body, $locationTmp)){
+            $this->respawnFood($board);
+        }
+        $this->location = $locationTmp;
         $this->draw();
     }
     public function respawnFood(Board $board){
         $this->boardW = $board->board;
         $boardYX = $board->getBoardYX();
-        $this->location = ['y'=>rand(1, $boardYX['y']-2), 'x'=>rand(1, $boardYX['x']-2)];
+        $locationTmp = ['y'=>rand(1, $boardYX['y']-2), 'x'=>rand(1, $boardYX['x']-2)];
+        if($this->isFoodBodyIntersects($this->snake->body, $locationTmp)){
+            $this->respawnFood($board);
+            return;
+        }
+        $this->location = $locationTmp;
         $this->draw();
     }
     public function draw(){
         ncurses_mvwaddstr($this->boardW, $this->location['y'], $this->location['x'], '$');
         ncurses_wrefresh($this->boardW);
     }
+    public function isFoodBodyIntersects($body, $foodlocation){
+        foreach($body as $el){
+            if($el['x']===$foodlocation['x'] && $el['y']===$foodlocation['y']){
+                return true;
+            }
+        }
+    }
 }
 
 class Snake{
     protected int $y;
     protected int $x;
-    protected array $body;
+    public array $body;
     public string $direction = 'east';
     public function __construct(int $y, int $x){
         $this->y = $y;
