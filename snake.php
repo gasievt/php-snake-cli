@@ -134,10 +134,6 @@ class Snake{
     public function changeDirection($newDirection){
         if (in_array($newDirection, ['east', 'west', 'north', 'south'])) {
             $this->direction = $newDirection;
-            $head = $this->body[0];
-            $tail = array_pop($this->body);
-            $tail=$head;
-            array_unshift($this->body, $tail);
         }
         
      }
