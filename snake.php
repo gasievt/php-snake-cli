@@ -70,14 +70,7 @@ class Food{
     protected $snake;
     public function __construct(Board $board, Snake $snake){
         $this->snake = $snake;
-        $this->boardW = $board->board;
-        $boardYX = $board->getBoardYX();
-        $locationTmp = ['y'=>rand(1, $boardYX['y']-2), 'x'=>rand(1, $boardYX['x']-2)];
-        if($this->isFoodBodyIntersects($snake->body, $locationTmp)){
-            $this->respawnFood($board);
-        }
-        $this->location = $locationTmp;
-        $this->draw();
+        $this->respawnFood($board);
     }
     public function respawnFood(Board $board){
         $this->boardW = $board->board;
