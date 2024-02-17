@@ -1,5 +1,5 @@
 <?php
-$ncurse = ncurses_init();
+$ncurses = ncurses_init();
 ncurses_curs_set(0);
 $board = new Board();
 $snake = new Snake($board->getBoardYX()['y'], $board->getBoardYX()['x']);
@@ -41,7 +41,6 @@ while(true){
     $snake->update($board, $food);
     $snake->draw($board->board);
     $food->draw();
-
     usleep(100000);
 }
 
