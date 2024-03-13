@@ -147,20 +147,17 @@ class Snake{
         switch($this->direction){
             case 'east':
                 $tail['x']++;
-                array_unshift($this->body, $tail);
                 break;
             case 'west':
                 $tail['x']--;
-                array_unshift($this->body, $tail);
                 break;
             case 'north':
                 $tail['y']--;
-                array_unshift($this->body,$tail);
                 break;
             case 'south':
                 $tail['y']++;
-                array_unshift($this->body, $tail);
         }
+        array_unshift($this->body, $tail);
         $this->eat($food, $board);
         $this->draw($board->board);
         if($this->isGameOver($food)){
