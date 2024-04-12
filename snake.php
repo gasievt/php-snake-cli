@@ -9,35 +9,35 @@ ncurses_timeout(0);
 
 while(true){
     $pressed = ncurses_getch();
-        switch ($pressed) {
-            case NCURSES_KEY_UP:
-                if($snake->direction!=='south'){
-                    $snake->changeDirection('north');
-                    break;
-                }
+    switch ($pressed) {
+        case NCURSES_KEY_UP:
+            if($snake->direction!=='south'){
+                $snake->changeDirection('north');
                 break;
-            case NCURSES_KEY_DOWN:
-                if($snake->direction!=='north'){
-                    $snake->changeDirection('south');
-                    break;
-                }
+            }
+            break;
+        case NCURSES_KEY_DOWN:
+            if($snake->direction!=='north'){
+                $snake->changeDirection('south');
                 break;
-            case NCURSES_KEY_LEFT:
-                if($snake->direction!=='east'){
-                    $snake->changeDirection('west');
-                    break;   
-                }
-                break; 
-            case NCURSES_KEY_RIGHT:
-                if($snake->direction!=='west'){
-                    $snake->changeDirection('east');
-                    break;
-                }
+            }
+            break;
+        case NCURSES_KEY_LEFT:
+            if($snake->direction!=='east'){
+                $snake->changeDirection('west');
                 break;
-            case ord("q"):
-                ncurses_end();
-                die(); 
-        }
+            }
+            break;
+        case NCURSES_KEY_RIGHT:
+            if($snake->direction!=='west'){
+                $snake->changeDirection('east');
+                break;
+            }
+            break;
+        case ord("q"):
+            ncurses_end();
+            die();
+    }
     $snake->update($board, $food);
     $snake->draw($board->board);
     $food->draw();
@@ -57,7 +57,6 @@ class Board {
         ncurses_refresh();
     }
     public function getBoardYX(){
-        $y; $x;
         ncurses_getmaxyx($this->board, $y, $x);
         return ['y'=>$y, 'x'=>$x];
     }
@@ -108,7 +107,7 @@ class Snake{
 
     public function isGameOver(Food $food){
         if($this->body[0]['x']===0 || $this->body[0]['y']===0 ||
-        $this->body[0]['x']===$this->x-1 || $this->body[0]['y']===$this->y-1 || $this->isBiteItself()){
+            $this->body[0]['x']===$this->x-1 || $this->body[0]['y']===$this->y-1 || $this->isBiteItself()){
             return true;
         }
     }
@@ -127,9 +126,9 @@ class Snake{
         if (in_array($newDirection, ['east', 'west', 'north', 'south'])) {
             $this->direction = $newDirection;
         }
-        
-     }
-     
+
+    }
+
     public function draw($board){
         foreach($this->body as $segment){
             ncurses_mvwaddstr($board, $segment['y'], $segment['x'], 'X');
@@ -165,7 +164,7 @@ class Snake{
             die();
         }
     }
-    
+
     public function eat(Food $food, Board $board){
         if($food->location['y']===$this->body[0]['y'] && $food->location['x']===$this->body[0]['x']){
             switch($this->direction){
