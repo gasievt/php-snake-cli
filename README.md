@@ -2,7 +2,7 @@
 ![GIF](https://i.ibb.co/XtKQdqG/2024-02-09-23-24-11-online-video-cutter-com.gif)
 <br>
 ### HOW TO RUN:
-1. Install ncurses
+1. Install ncurses extension
 ```properties
 git clone https://github.com/OOPS-ORG-PHP/mod_ncurses.git
 cd mod_ncurses
